@@ -1,7 +1,10 @@
 <?php
 
+use yii\helpers\Url;
+
 $this->params['breadcrumbs'][] = ['label' => 'Admin', 'url' => ['/admin']];
 $this->params['breadcrumbs'][] = 'News';
+
 ?>
 
 <?php if(count($news)): ?>
@@ -22,8 +25,8 @@ $this->params['breadcrumbs'][] = 'News';
                     <td><?= $new['category_id'] ?></td>
                     <td><?= $new['title'] ?></td>
                     <td><?= $new['text'] ?></td>
-                    <td><a href="#"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
-                    <td><a href="#"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
+                    <td><a href="<?= Url::to(["/admin/news/edit/{$new['id']}"]) ?>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+                    <td><a href="<?= Url::to(["/admin/news/remove/{$new['id']}"]) ?>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
                 </tr>
             <?php endforeach; ?>
         </table>

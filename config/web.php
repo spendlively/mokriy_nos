@@ -48,6 +48,10 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 'news/news_<alias:\w+>' => 'news/news',
+                'admin/category/remove/<id>' => 'admin/remove-category',
+                'admin/category/edit/<id>' => 'admin/edit-category',
+                'admin/news/remove/<id>' => 'admin/remove-news',
+                'admin/news/edit/<id>' => 'admin/edit-news',
             ],
         ],
     ],

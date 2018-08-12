@@ -10,6 +10,7 @@ namespace app\controllers;
 
 use app\models\Category;
 use app\models\News;
+use Yii;
 use yii\base\Controller;
 use yii\filters\AccessControl;
 
@@ -57,11 +58,25 @@ class AdminController extends Controller
 
     public function actionRemoveNews()
     {
-
+        $categoryId = Yii::$app->getRequest()->getQueryParam('id');
+        return "REMOVE NEWS {$categoryId}";
     }
 
     public function actionRemoveCategory()
     {
+        $categoryId = Yii::$app->getRequest()->getQueryParam('id');
+        return "REMOVE CATEGORY {$categoryId}";
+    }
 
+    public function actionEditNews()
+    {
+        $newsId = Yii::$app->getRequest()->getQueryParam('id');
+        return "EDIT NEWS {$newsId}";
+    }
+
+    public function actionEditCategory()
+    {
+        $newsId = Yii::$app->getRequest()->getQueryParam('id');
+        return "EDIT NEWS {$newsId}";
     }
 }
