@@ -2,13 +2,16 @@
 
 namespace app\controllers;
 
+use app\models\Category;
+use app\models\News;
 use Yii;
+use yii\data\Pagination;
+use yii\data\Sort;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
-use app\models\ContactForm;
 
 class SiteController extends Controller
 {
@@ -61,7 +64,67 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+
+        $categoryId = (int)Yii::$app->getRequest()->getQueryParam('category');
+
+        $sort = new Sort([
+            'attributes' => [
+                'date' => [
+                    'asc' => ['date' => SORT_ASC],
+                    'desc' => ['date' => SORT_DESC],
+                    'label' => 'Сортировать по дате',
+                ],
+            ],
+        ]);
+
+        $orderBy = empty($sort->orders) ? ['date' => SORT_DESC] : $sort->orders;
+
+        $news = News::find()->asArray()->orderBy($orderBy);
+        if($categoryId){
+            $news = $news->where(['category_id' => $categoryId]);
+        }
+
+
+        $pagination = new Pagination([
+            'defaultPageSize' => 3,
+            'totalCount' => $news->count(),
+        ]);
+
+        $news = $news
+            ->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
+
+        $parentCategory = $categoryId ? Category::find()->asArray()->where(['id' => $categoryId])->one() : null;
+
+        return $this->render('index', [
+            'parentCategory' => $parentCategory,
+            'categories' => $this->getCategories($categoryId),
+            'news' => $news,
+            'pagination' => $pagination,
+            'sort' => $sort,
+        ]);
+    }
+
+    public function getCategories($categoryId)
+    {
+        $whereCondition = $categoryId ? "c.parent_id = {$categoryId}" : "c.parent_id is NULL";
+        $query = "
+          SELECT 
+            c.id id, 
+            c.parent_id parent_id, 
+            c.name name,
+            COUNT(n.id) count
+          FROM category c
+          INNER JOIN news n ON n.category_id = c.id
+          WHERE {$whereCondition}
+          GROUP BY c.id, c.parent_id, c.name
+          HAVING count > 0  
+        ";
+
+        $categories = Category::findBySql($query)->asArray()->all();
+
+        return $categories;
     }
 
     /**
@@ -98,31 +161,31 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
-    /**
-     * Displays contact page.
-     *
-     * @return Response|string
-     */
-    public function actionContact()
-    {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
-            return $this->refresh();
-        }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Displays about page.
-     *
-     * @return string
-     */
-    public function actionAbout()
-    {
-        return $this->render('about');
-    }
+//    /**
+//     * Displays contact page.
+//     *
+//     * @return Response|string
+//     */
+//    public function actionContact()
+//    {
+//        $model = new ContactForm();
+//        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
+//            Yii::$app->session->setFlash('contactFormSubmitted');
+//
+//            return $this->refresh();
+//        }
+//        return $this->render('contact', [
+//            'model' => $model,
+//        ]);
+//    }
+//
+//    /**
+//     * Displays about page.
+//     *
+//     * @return string
+//     */
+//    public function actionAbout()
+//    {
+//        return $this->render('about');
+//    }
 }
