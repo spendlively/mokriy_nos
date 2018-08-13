@@ -59,24 +59,24 @@ class AdminController extends Controller
     public function actionRemoveNews()
     {
         $categoryId = Yii::$app->getRequest()->getQueryParam('id');
-        return "REMOVE NEWS {$categoryId}";
+        return $this->render('remove-news', []);
     }
 
     public function actionRemoveCategory()
     {
         $categoryId = Yii::$app->getRequest()->getQueryParam('id');
-        return "REMOVE CATEGORY {$categoryId}";
+        return $this->render('remove-category', []);
     }
 
     public function actionEditNews()
     {
         $newsId = Yii::$app->getRequest()->getQueryParam('id');
-        return "EDIT NEWS {$newsId}";
+        return $this->render('edit-news', []);
     }
 
     public function actionEditCategory()
     {
         $newsId = Yii::$app->getRequest()->getQueryParam('id');
-        return "EDIT NEWS {$newsId}";
+        return $this->render('edit-category', []);
     }
 }

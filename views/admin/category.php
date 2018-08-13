@@ -3,7 +3,7 @@
 use yii\helpers\Url;
 
 $this->params['breadcrumbs'][] = ['label' => 'Admin', 'url' => ['/admin']];
-$this->params['breadcrumbs']['Admin'] = 'Category';
+$this->params['breadcrumbs']['Admin'] = 'Category List';
 
 ?>
 
