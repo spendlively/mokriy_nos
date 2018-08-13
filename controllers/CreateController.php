@@ -19,17 +19,17 @@ class CreateController extends Controller
 
     public $categories = [
         //id, parent_id, name
-        [1, null, 'Категория 1'],
-        [2, null, 'Категория 2'],
-        [3, null, 'Категория 3'],
+        [1, null, 'Category 1'],
+        [2, null, 'Category 2'],
+        [3, null, 'Category 3'],
 
-        [4, 1, 'Категория 11'],
-        [5, 2, 'Категория 22'],
-        [6, 3, 'Категория 33'],
+        [4, 1, 'Category 11'],
+        [5, 2, 'Category 22'],
+        [6, 3, 'Category 33'],
 
-        [7, 4, 'Категория 111'],
-        [8, 5, 'Категория 222'],
-        [9, 6, 'Категория 333'],
+        [7, 4, 'Category 111'],
+        [8, 5, 'Category 222'],
+        [9, 6, 'Category 333'],
     ];
 
     public $news = [
@@ -80,13 +80,13 @@ class CreateController extends Controller
         [null, 9],
     ];
 
-    public $newsTitleTemplate = 'Заголовок';
+    public $newsTitleTemplate = 'Header';
     public $newsShortTextTemplate = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
     public $newsTextTemplate = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.';
     public $newsAliasTemplate = 'alias';
 
-    public $commentNameTemplate = 'Гость';
-    public $commentTextTemplate = 'Текст комментария';
+    public $commentNameTemplate = 'Guest';
+    public $commentTextTemplate = 'Comment\'s text';
 
     public function trancateTable($tableName)
     {

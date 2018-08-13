@@ -72,7 +72,7 @@ class SiteController extends Controller
                 'date' => [
                     'asc' => ['date' => SORT_ASC],
                     'desc' => ['date' => SORT_DESC],
-                    'label' => 'Сортировать по дате',
+                    'label' => 'Sort by Date',
                 ],
             ],
         ]);

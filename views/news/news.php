@@ -3,7 +3,7 @@
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 
-setlocale(LC_ALL, 'ru_RU', 'ru_RU.UTF-8', 'ru', 'russian');
+//setlocale(LC_ALL, 'ru_RU', 'ru_RU.UTF-8', 'ru', 'russian');
 
 $this->title = $news['title'];
 
@@ -18,17 +18,17 @@ $this->params['breadcrumbs'][] = $news['title'];
 <hr class="mn-news-hr">
 
 <?php if(count($comments)): ?>
-<h2>Комментарии</h2>
+<h2>Comments</h2>
     <?php foreach($comments as $comment): ?>
         <div>
-            <p>Автор: <?= $comment['name'] ?> (<?= strftime("%B %d, %Y", strtotime($comment['date'])) ?>)</p>
+            <p>Author: <?= $comment['name'] ?> (<?= strftime("%B %d, %Y", strtotime($comment['date'])) ?>)</p>
             <p><?= $comment['text'] ?></p>
         </div>
         <hr class="mn-news-hr">
     <?php endforeach; ?>
 <?php endif; ?>
 
-<h3>Добавить комментарий</h3>
+<h3>Post a new comment</h3>
 
 <?php $activeForm = ActiveForm::begin(['options' => ['id' => 'comment-form']]);?>
 
@@ -36,6 +36,6 @@ $this->params['breadcrumbs'][] = $news['title'];
 <?= $activeForm->field($commentModel, 'text')->textArea(['rows' => 5]);?>
 <?= $activeForm->field($commentModel, 'news_id')->hiddenInput(['value'=> $news['id']])->label(false);?>
 
-<?= Html::submitButton('Отправить', ['class' => 'btn btn-success']); ?>
+<?= Html::submitButton('Send', ['class' => 'btn btn-success']); ?>
 
 <?php $activeForm = ActiveForm::end(); ?>

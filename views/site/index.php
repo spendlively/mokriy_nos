@@ -3,7 +3,7 @@
 use yii\helpers\Url;
 use yii\widgets\LinkPager;
 
-$this->title = 'Главная страница';
+$this->title = 'Main page';
 
 ?>
 <div class="site-index">
@@ -42,4 +42,3 @@ $this->title = 'Главная страница';
 
     </div>
 </div>
-c
