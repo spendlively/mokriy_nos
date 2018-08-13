@@ -1,38 +1,13 @@
 
-CREATE DATABASE mokriy_nos CHARACTER SET utf8 COLLATE utf8_general_ci;
-GRANT ALL PRIVILEGES ON mokriy_nos.* TO mokriy_nos@localhost IDENTIFIED BY 'mokriy_nos';
+1. Create data base, user and tables
+mysql -u root -p < db.sql
 
+2. Adjust web-server in root directory
+cd mokriy_nos/web/
+sudo php -S 0.0.0.0:7777
 
+3. Run web browser
+google-chrome http://localhost:7777
 
-
-Задание
-
-БД
- - Внешние ключи
- - Уникальные ключи для категорий
-
-Yii
-//Главная
- - добавить пагнацию новостей
- - сортировка по дате в прямом и обратном порядке
-
-//Страница новости
- - вывести комментарии
- - добавить форму для создаия комментария
-
-//Админка
- - ACL
-
- - список новостей + удалить
- - создать/изменить новость
-
- - список категория + удалить
- - создать/изменить категорию
-
-
-
-
-- Убрать русские или унглийские буквы
-- Возможно написать хелпер для менюшек
-- Тесты
-- Комментарии
+4. Create testing data in browser (Optional)
+Click on "Create Test Data"
