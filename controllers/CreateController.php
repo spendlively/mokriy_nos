@@ -121,6 +121,9 @@ class CreateController extends Controller
 
         $increment = 1;
 
+        $date = new \DateTime('-1 year');
+        $dateInterval = \DateInterval::createFromDateString('1 day');
+
         foreach($this->news as $news){
 
             $model = new News();
@@ -133,12 +136,12 @@ class CreateController extends Controller
             $model->is_active = true;
             $model->alias = sprintf("%s_%s", $this->newsAliasTemplate, $increment);
 
+            $model->date = $date->format('Y-m-d H:i:s');
+            $date->add($dateInterval);
+
             $model->save();
 
             $increment++;
-
-            //Костыль, чтобы потом сортировать по дате
-            sleep(1);
         }
 
         return sprintf("%s news created", count($this->news));
@@ -177,6 +180,8 @@ class CreateController extends Controller
         $result .= $this->actionNews() . "<br />";
         $result .= $this->actionComments() . "<br />";
 
-        return $result;
+        return $this->render('all', [
+            'result' => $result,
+        ]);
     }
 }

@@ -11,7 +11,6 @@ namespace app\controllers;
 use app\models\Comment;
 use app\models\News;
 use Yii;
-use yii\data\Pagination;
 use yii\web\Controller;
 use yii\web\HttpException;
 
@@ -26,11 +25,11 @@ class NewsController extends Controller
         $commentModel = new Comment();
         if ($commentModel->load(Yii::$app->request->post())){
             if($commentModel->save()){
-                Yii::$app->session->setFlash('success', 'Данные приняты');
+                Yii::$app->session->setFlash('success', 'Your comment is saved');
                 return $this->refresh();
 
             } else {
-                Yii::$app->session->setFlash('error', 'Ошибка валидации');
+                Yii::$app->session->setFlash('error', 'Validation error');
             }
         }
 

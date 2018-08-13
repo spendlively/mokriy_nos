@@ -53,7 +53,8 @@ AppAsset::register($this);
                 )
                 . Html::endForm()
                 . '</li>'
-            )
+            ),
+            ['label' => 'Create Test Data', 'url' => ['/create/all']],
         ],
     ]);
     NavBar::end();

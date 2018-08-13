@@ -19,24 +19,32 @@ class Category extends ActiveRecord
         return 'category';
     }
 
-//    public function attributeLabels()
-//    {
-//        return [
-//            'name' => 'Имя',
-//            'text' => 'Текст сообщения',
-//        ];
-//    }
-//
-//    public function rules()
-//    {
-//        return [
-//            ['name', 'required', 'message' => 'Поле "Имя" обязательно для заполнения'],
-//            ['text', 'required', 'message' => 'Поле "Текст сообщения" обязательно для заполнения'],
-//            [['name', 'text'], 'trim'],
-//            ['name', 'string', 'min' => 3, 'tooShort' => 'Имя должно быть не менее 3 символов'],
-//            ['name', 'string', 'max' => 10, 'tooLong' => 'Имя должно быть не более 10 символов'],
-//            ['text', 'string', 'max' => 1000, 'tooLong' => 'Текст сообщения должен быть не более 1000 символов'],
-//            ['news_id', 'integer'],
-//        ];
-//    }
+    public function attributeLabels()
+    {
+        return [
+            'parent_id' => 'Parent category',
+            'name' => 'Category name',
+        ];
+    }
+
+    public function rules()
+    {
+        return [
+            ['name', 'required'],
+            ['name', 'string', 'length' => [3, 255]],
+            ['parent_id', 'categoryValidator'],
+        ];
+    }
+
+    public function categoryValidator()
+    {
+        if($this->parent_id !== NULL){
+            if($this->parent_id === '0'){
+                $this->parent_id = NULL;
+            }
+            elseif (!$model = Category::findOne($this->parent_id)) {
+                $this->addError('category_id', 'Wrong parent id');
+            }
+        }
+    }
 }
