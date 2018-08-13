@@ -11,11 +11,11 @@ $this->params['breadcrumbs'][] = 'Category Form';
 
 <h1>Category Form</h1>
 
-<?php $activeForm = ActiveForm::begin(['options' => ['id' => 'comment-form']]);?>
+<?php $activeForm = ActiveForm::begin(['options' => ['id' => 'comment-form']]); ?>
 
 <?= $activeForm->field($model, 'parent_id')->dropDownList($categoriesList); ?>
 
-<?= $activeForm->field($model, 'name');?>
+<?= $activeForm->field($model, 'name'); ?>
 
 <?= Html::submitButton('Send', ['class' => 'btn btn-success']); ?>
 

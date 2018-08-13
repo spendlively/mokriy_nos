@@ -17,9 +17,9 @@ $this->params['breadcrumbs'][] = $news['title'];
 </div>
 <hr class="mn-news-hr">
 
-<?php if(count($comments)): ?>
-<h2>Comments</h2>
-    <?php foreach($comments as $comment): ?>
+<?php if (count($comments)): ?>
+    <h2>Comments</h2>
+    <?php foreach ($comments as $comment): ?>
         <div>
             <p>Author: <?= $comment['name'] ?> (<?= strftime("%B %d, %Y", strtotime($comment['date'])) ?>)</p>
             <p><?= $comment['text'] ?></p>
@@ -30,11 +30,11 @@ $this->params['breadcrumbs'][] = $news['title'];
 
 <h3>Post a new comment</h3>
 
-<?php $activeForm = ActiveForm::begin(['options' => ['id' => 'comment-form']]);?>
+<?php $activeForm = ActiveForm::begin(['options' => ['id' => 'comment-form']]); ?>
 
-<?= $activeForm->field($commentModel, 'name');?>
-<?= $activeForm->field($commentModel, 'text')->textArea(['rows' => 5]);?>
-<?= $activeForm->field($commentModel, 'news_id')->hiddenInput(['value'=> $news['id']])->label(false);?>
+<?= $activeForm->field($commentModel, 'name'); ?>
+<?= $activeForm->field($commentModel, 'text')->textArea(['rows' => 5]); ?>
+<?= $activeForm->field($commentModel, 'news_id')->hiddenInput(['value' => $news['id']])->label(false); ?>
 
 <?= Html::submitButton('Send', ['class' => 'btn btn-success']); ?>
 

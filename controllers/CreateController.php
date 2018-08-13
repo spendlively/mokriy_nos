@@ -100,7 +100,7 @@ class CreateController extends Controller
 
         $this->trancateTable(Category::tableName());
 
-        foreach($this->categories as $category){
+        foreach ($this->categories as $category) {
 
             $model = new Category();
 
@@ -124,7 +124,7 @@ class CreateController extends Controller
         $date = new \DateTime('-1 year');
         $dateInterval = \DateInterval::createFromDateString('1 day');
 
-        foreach($this->news as $news){
+        foreach ($this->news as $news) {
 
             $model = new News();
 
@@ -155,7 +155,7 @@ class CreateController extends Controller
         $firstNewId = (int)$firstNew->id;
         $count = count($this->news);
 
-        for($i = 0; $i < $count; $i++){
+        for ($i = 0; $i < $count; $i++) {
 
             $model = new Comment();
 

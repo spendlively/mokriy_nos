@@ -23,8 +23,8 @@ class NewsController extends Controller
     public function actionNews()
     {
         $commentModel = new Comment();
-        if ($commentModel->load(Yii::$app->request->post())){
-            if($commentModel->save()){
+        if ($commentModel->load(Yii::$app->request->post())) {
+            if ($commentModel->save()) {
                 Yii::$app->session->setFlash('success', 'Your comment is saved');
                 return $this->refresh();
 
@@ -39,8 +39,8 @@ class NewsController extends Controller
         $query = "SELECT * FROM {$tableName} WHERE alias = :alias";
         $news = News::findBySql($query, [':alias' => strtolower($alias)])->asArray()->one();
 
-        if(!$news){
-            throw new HttpException(404 ,'Page not found');
+        if (!$news) {
+            throw new HttpException(404, 'Page not found');
         }
 
         $comments = Comment::find()->asArray()->where(['news_id' => $news['id']])->all();

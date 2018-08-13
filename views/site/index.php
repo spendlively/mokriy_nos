@@ -13,25 +13,30 @@ $this->title = 'Main page';
         <div class="row">
             <div class="col-lg-2">
 
-                <?php if(count($categories) || $parentCategory): ?>
-                <ul class="nav nav-pills nav-stacked">
+                <?php if (count($categories) || $parentCategory): ?>
+                    <ul class="nav nav-pills nav-stacked">
 
-                    <?php if($parentCategory): ?>
-                        <li role="presentation"><a href="<?= Url::to(['/', 'category' => $parentCategory['parent_id']]) ?>">Назад</a></li>
-                    <?php endif; ?>
+                        <?php if ($parentCategory): ?>
+                            <li role="presentation"><a
+                                        href="<?= Url::to(['/', 'category' => $parentCategory['parent_id']]) ?>">Назад</a>
+                            </li>
+                        <?php endif; ?>
 
-                    <?php foreach($categories as $category): ?>
-                    <li role="presentation"><a href="<?= Url::to(['/', 'category' => $category['id']]) ?>"><?= $category['name'] ?></a></li>
-                    <?php endforeach; ?>
-                </ul>
+                        <?php foreach ($categories as $category): ?>
+                            <li role="presentation"><a
+                                        href="<?= Url::to(['/', 'category' => $category['id']]) ?>"><?= $category['name'] ?></a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
                 <?php endif; ?>
             </div>
             <div class="col-lg-10">
                 <?= $sort->link('date') ?>
-                <?php if(count($news)): ?>
-                    <?php foreach($news as $new): ?>
+                <?php if (count($news)): ?>
+                    <?php foreach ($news as $new): ?>
                         <div class="">
-                            <a href="<?= Url::to(['news/news', 'alias' => $new['alias']]) ?>"><h2><?= $new['title'] ?></h2></a>
+                            <a href="<?= Url::to(['news/news', 'alias' => $new['alias']]) ?>">
+                                <h2><?= $new['title'] ?></h2></a>
                             <p><?= $new['short_text'] ?></p>
                         </div>
                     <?php endforeach; ?>
