@@ -14,11 +14,20 @@ use app\models\News;
 use Yii;
 use yii\base\Controller;
 
+/**
+ * Controller for creating testing data
+ *
+ * Class CreateController
+ * @package app\controllers
+ */
 class CreateController extends Controller
 {
-
+    /**
+     * Data for the category table
+     *
+     * @var array
+     */
     public $categories = [
-        //id, parent_id, name
         [1, null, 'Category 1'],
         [2, null, 'Category 2'],
         [3, null, 'Category 3'],
@@ -32,8 +41,12 @@ class CreateController extends Controller
         [9, 6, 'Category 333'],
     ];
 
+    /**
+     * Data for the news table
+     *
+     * @var array
+     */
     public $news = [
-        //id, category_id
         [null, 1],
         [null, 1],
         [null, 1],
@@ -80,14 +93,57 @@ class CreateController extends Controller
         [null, 9],
     ];
 
+    /**
+     * News title template string
+     *
+     * @var string
+     */
     public $newsTitleTemplate = 'Header';
+
+    /**
+     * News short text template string
+     *
+     * @var string
+     */
     public $newsShortTextTemplate = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
+
+    /**
+     * News text template string
+     *
+     * @var string
+     */
     public $newsTextTemplate = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.';
+
+    /**
+     * News alias template string
+     *
+     * @var string
+     */
     public $newsAliasTemplate = 'alias';
 
+    /**
+     * Comments author template string
+     *
+     * @var string
+     */
     public $commentNameTemplate = 'Guest';
+
+    /**
+     * Comments text template string
+     *
+     * @var string
+     */
     public $commentTextTemplate = 'Comment\'s text';
 
+    /**
+     * Trancates selected table
+     *
+     * @param $tableName
+     *
+     * @return \yii\db\DataReader
+     *
+     * @throws \yii\db\Exception
+     */
     public function trancateTable($tableName)
     {
         $connection = Yii::$app->getDb();
@@ -95,6 +151,13 @@ class CreateController extends Controller
         return $command->query();
     }
 
+    /**
+     * Fills category table
+     *
+     * @return string
+     *
+     * @throws \yii\db\Exception
+     */
     public function actionCategories()
     {
 
@@ -114,6 +177,13 @@ class CreateController extends Controller
         return sprintf("%s categories created", count($this->categories));
     }
 
+    /**
+     * Fills news table
+     *
+     * @return string
+     *
+     * @throws \yii\db\Exception
+     */
     public function actionNews()
     {
 
@@ -147,6 +217,13 @@ class CreateController extends Controller
         return sprintf("%s news created", count($this->news));
     }
 
+    /**
+     * Fills comment table
+     *
+     * @return string
+     *
+     * @throws \yii\db\Exception
+     */
     public function actionComments()
     {
         $this->trancateTable(Comment::tableName());
@@ -171,6 +248,13 @@ class CreateController extends Controller
         return sprintf("%s comments created", $count);
     }
 
+    /**
+     * Aggregating method, fills all tables
+     *
+     * @return string
+     *
+     * @throws \yii\db\Exception
+     */
     public function actionAll()
     {
 

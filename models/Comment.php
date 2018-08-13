@@ -12,12 +12,21 @@ use yii\db\ActiveRecord;
 
 class Comment extends ActiveRecord
 {
-
+    /**
+     * Returns comment table name
+     *
+     * @return string
+     */
     public static function tableName()
     {
         return 'comment';
     }
 
+    /**
+     * Returns comment models labels
+     *
+     * @return array
+     */
     public function attributeLabels()
     {
         return [
@@ -26,6 +35,11 @@ class Comment extends ActiveRecord
         ];
     }
 
+    /**
+     * Returns comment validation rules
+     *
+     * @return array
+     */
     public function rules()
     {
         return [

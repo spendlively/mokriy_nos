@@ -14,9 +14,20 @@ use Yii;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 
+/**
+ * Admin panel private controller
+ *
+ * Class AdminController
+ * @package app\controllers
+ */
 class AdminController extends Controller
 {
 
+    /**
+     * Behaviors rules
+     *
+     * @return array
+     */
     public function behaviors()
     {
         return [
@@ -32,11 +43,21 @@ class AdminController extends Controller
         ];
     }
 
+    /**
+     * Admin panel main page action
+     *
+     * @return string
+     */
     public function actionIndex()
     {
         return $this->render('index', []);
     }
 
+    /**
+     * Admin panel category list page action
+     *
+     * @return string
+     */
     public function actionCategory()
     {
         $categories = Category::find()->orderBy(['id' => SORT_ASC])->all();
@@ -46,6 +67,11 @@ class AdminController extends Controller
         ]);
     }
 
+    /**
+     * Admin panel news list page action
+     *
+     * @return string
+     */
     public function actionNews()
     {
         $news = News::find()->orderBy(['id' => SORT_ASC])->all();
@@ -55,6 +81,14 @@ class AdminController extends Controller
         ]);
     }
 
+    /**
+     * Admin panel remove news page action
+     *
+     * @return \yii\web\Response
+     *
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     */
     public function actionRemoveNews()
     {
         $newsId = (int)Yii::$app->getRequest()->getQueryParam('id');
@@ -73,6 +107,14 @@ class AdminController extends Controller
         return $this->redirect(Yii::$app->request->referrer);
     }
 
+    /**
+     * Admin panel remove category page action
+     *
+     * @return \yii\web\Response
+     *
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     */
     public function actionRemoveCategory()
     {
         $categoryId = (int)Yii::$app->getRequest()->getQueryParam('id');
@@ -96,6 +138,11 @@ class AdminController extends Controller
         return $this->redirect(Yii::$app->request->referrer);
     }
 
+    /**
+     * Admin panel add news page action
+     *
+     * @return string|\yii\web\Response
+     */
     public function actionAddNews()
     {
         $model = new News();
@@ -121,6 +168,11 @@ class AdminController extends Controller
         ]);
     }
 
+    /**
+     * Admin panel edit news page action
+     *
+     * @return string|\yii\web\Response
+     */
     public function actionEditNews()
     {
         $newsId = Yii::$app->getRequest()->getQueryParam('id');
@@ -148,6 +200,11 @@ class AdminController extends Controller
         ]);
     }
 
+    /**
+     * Admin panel add category page action
+     *
+     * @return string|\yii\web\Response
+     */
     public function actionAddCategory()
     {
         $model = new Category();
@@ -174,6 +231,11 @@ class AdminController extends Controller
         ]);
     }
 
+    /**
+     * Admin panel edit category page action
+     *
+     * @return string|\yii\web\Response
+     */
     public function actionEditCategory()
     {
         $categoryId = Yii::$app->getRequest()->getQueryParam('id');

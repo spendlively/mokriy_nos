@@ -14,10 +14,19 @@ use Yii;
 use yii\web\Controller;
 use yii\web\HttpException;
 
+/**
+ * Controller displaing news and comments
+ *
+ * Class NewsController
+ * @package app\controllers
+ */
 class NewsController extends Controller
 {
     /**
-     * @return string
+     * News page action
+     *
+     * @return string|\yii\web\Response
+     *
      * @throws HttpException
      */
     public function actionNews()

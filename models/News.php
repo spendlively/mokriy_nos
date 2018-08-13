@@ -12,12 +12,21 @@ use yii\db\ActiveRecord;
 
 class News extends ActiveRecord
 {
-
+    /**
+     * Returns news table name
+     *
+     * @return string
+     */
     public static function tableName()
     {
         return 'news';
     }
 
+    /**
+     * Returns news models labels
+     *
+     * @return array
+     */
     public function attributeLabels()
     {
         return [
@@ -29,6 +38,11 @@ class News extends ActiveRecord
         ];
     }
 
+    /**
+     * Returns news validation rules
+     *
+     * @return array
+     */
     public function rules()
     {
         return [
@@ -46,11 +60,17 @@ class News extends ActiveRecord
         ];
     }
 
+    /**
+     * Generates alias field transliterates is from title field
+     */
     public function titleValidator()
     {
         $this->alias = $this->translit($this->title);
     }
 
+    /**
+     * Validates category_id field
+     */
     public function categoryValidator()
     {
         if (!$model = Category::findOne($this->category_id)) {
@@ -58,6 +78,12 @@ class News extends ActiveRecord
         }
     }
 
+    /**
+     * Transliterates cyrillic string to latin
+     *
+     * @param $s
+     * @return mixed|null|string|string[]
+     */
     public function translit($s)
     {
         $s = (string)$s;

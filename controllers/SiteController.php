@@ -84,7 +84,6 @@ class SiteController extends Controller
             $news = $news->where(['category_id' => $categoryId]);
         }
 
-
         $pagination = new Pagination([
             'defaultPageSize' => 3,
             'totalCount' => $news->count(),
@@ -106,6 +105,13 @@ class SiteController extends Controller
         ]);
     }
 
+    /**
+     * Returns categories array by category id
+     *
+     * @param $categoryId
+     *
+     * @return array|\yii\db\ActiveRecord[]
+     */
     public function getCategories($categoryId)
     {
         $whereCondition = $categoryId ? "c.parent_id = {$categoryId}" : "c.parent_id is NULL";
@@ -128,7 +134,7 @@ class SiteController extends Controller
     }
 
     /**
-     * Login action.
+     * Login action
      *
      * @return Response|string
      */

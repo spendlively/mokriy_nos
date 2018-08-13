@@ -13,12 +13,21 @@ use yii\db\ActiveRecord;
 
 class Category extends ActiveRecord
 {
-
+    /**
+     * Returns category table name
+     *
+     * @return string
+     */
     public static function tableName()
     {
         return 'category';
     }
 
+    /**
+     * Returns category models labels
+     *
+     * @return array
+     */
     public function attributeLabels()
     {
         return [
@@ -27,6 +36,11 @@ class Category extends ActiveRecord
         ];
     }
 
+    /**
+     * Returns category validation rules
+     *
+     * @return array
+     */
     public function rules()
     {
         return [
@@ -36,6 +50,9 @@ class Category extends ActiveRecord
         ];
     }
 
+    /**
+     * Validates category's parent id
+     */
     public function categoryValidator()
     {
         if ($this->parent_id !== NULL) {

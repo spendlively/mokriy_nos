@@ -7,7 +7,11 @@ use yii\db\ActiveRecord;
 
 class User extends ActiveRecord implements \yii\web\IdentityInterface
 {
-
+    /**
+     * Returns user table name
+     *
+     * @return string
+     */
     public static function tablename()
     {
         return 'user';
