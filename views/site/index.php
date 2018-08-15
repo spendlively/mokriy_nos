@@ -18,7 +18,7 @@ $this->title = 'Main page';
 
                         <?php if ($parentCategory): ?>
                             <li role="presentation"><a
-                                        href="<?= Url::to(['/', 'category' => $parentCategory['parent_id']]) ?>">Назад</a>
+                                        href="<?= Url::to(['/', 'category' => $parentCategory['parent_id']]) ?>">Get Back</a>
                             </li>
                         <?php endif; ?>
 
